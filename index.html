@@ -2126,15 +2126,14 @@ function dataToObjects(data) {
         };
       });
 
-      // Get top upvoted activities (at least 2 upvotes)
+      // Get all activities sorted by votes (stack ranked)
       const topActivities = appData.activities
         .map(a => {
           const upvotes = a.upvotes ? a.upvotes.split(', ').filter(u => u.trim()).length : 0;
-          return { ...a, upvoteCount: upvotes };
+          const downvotes = a.downvotes ? a.downvotes.split(', ').filter(d => d.trim()).length : 0;
+          return { ...a, upvoteCount: upvotes, downvoteCount: downvotes };
         })
-        .filter(a => a.upvoteCount >= 2)
-        .sort((a, b) => b.upvoteCount - a.upvoteCount)
-        .slice(0, 5);
+        .sort((a, b) => b.upvoteCount - a.upvoteCount);
 
       return `
         <div class="day-panel ${activeDay === 'overview' ? 'active' : ''}" id="overview">
@@ -2191,19 +2190,19 @@ function dataToObjects(data) {
               `).join('')}
             </div>
 
-            <!-- Top Activities -->
+            <!-- All Activities -->
             <div class="overview-card">
-              <div class="overview-card-title">✨ Popular Activities</div>
+              <div class="overview-card-title">🎯 All Activities (by votes)</div>
               ${topActivities.length > 0 ? topActivities.map(activity => `
                 <div class="mini-day-card">
                   <div style="font-weight: 600; margin-bottom: 0.25rem;">
                     ${activity.link ? `<a href="${activity.link}" target="_blank" style="color: var(--accent); text-decoration: none;">${activity.title} →</a>` : activity.title}
                   </div>
                   <div style="color: var(--text-secondary); font-size: 0.8rem;">
-                    👍 ${activity.upvoteCount} interested • ${activity.day === 'any' ? 'Any day' : `Day ${activity.day}`}
+                    👍 ${activity.upvoteCount} ${activity.downvoteCount > 0 ? `• 👎 ${activity.downvoteCount}` : ''} • ${activity.day === 'any' ? 'Any day' : `Day ${activity.day}`}
                   </div>
                 </div>
-              `).join('') : '<div class="empty-state">No activities with 2+ votes yet. Start voting on suggestions!</div>'}
+              `).join('') : '<div class="empty-state">No activities suggested yet. Be the first to add one!</div>'}
             </div>
           </div>
         </div>
