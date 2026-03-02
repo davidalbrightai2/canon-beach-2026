@@ -2106,23 +2106,31 @@ function dataToObjects(data) {
       allTides.sort((a, b) => a.height - b.height);
       const lowestTide = allTides[0];
 
-      // Get meal summary
+      // Get meal summary with individual meal status
       const mealSummary = DAYS.map(day => {
         const dayMeals = appData.meals.filter(m => String(m.day) === String(day.num));
         let mealTypesToShow = MEAL_TYPES;
         if (day.num === 1) mealTypesToShow = ['Dinner'];
         else if (day.num === 5) mealTypesToShow = ['Breakfast'];
 
-        const claimed = mealTypesToShow.filter(type => {
+        const mealStatus = mealTypesToShow.map(type => {
           const meal = dayMeals.find(m => m.mealType === type);
-          return meal && (meal.claimedBy || meal.isDYOT === 'TRUE');
-        }).length;
+          const isClaimed = meal && (meal.claimedBy || meal.isDYOT === 'TRUE');
+          return {
+            type: type,
+            isClaimed: isClaimed,
+            emoji: MEAL_EMOJIS[type]
+          };
+        });
+
+        const claimed = mealStatus.filter(m => m.isClaimed).length;
 
         return {
           day: day.num,
           dayName: day.date,
           total: mealTypesToShow.length,
-          claimed
+          claimed,
+          meals: mealStatus
         };
       });
 
@@ -2182,8 +2190,12 @@ function dataToObjects(data) {
                     <div>
                       <strong>Day ${summary.day}</strong> – ${summary.dayName}
                     </div>
-                    <div style="font-weight: 600; color: ${summary.claimed === summary.total ? 'var(--success)' : 'var(--text-tertiary)'};">
-                      ${summary.claimed}/${summary.total} planned
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                      ${summary.meals.map(meal => `
+                        <span style="font-size: 1.1rem;" title="${meal.type}">
+                          ${meal.emoji}${meal.isClaimed ? '<span style="color: var(--success);">✓</span>' : '<span style="color: #dc2626;">✗</span>'}
+                        </span>
+                      `).join('')}
                     </div>
                   </div>
                 </div>
