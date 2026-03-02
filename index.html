@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cannon Beach 2026 • Albright Family Trip</title>
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-secondary: #f7f6f3;
+      --bg-hover: #f1f0ed;
+      --text-primary: #37352f;
+      --text-secondary: #787774;
+      --text-tertiary: #9b9a97;
+      --border: #e9e9e7;
+      --border-hover: #d3d3d1;
+      --accent: #2383e2;
+      --accent-bg: #e8f3ff;
+      --success: #0f7b6c;
+      --success-bg: #ddedea;
+      --warning: #d9730d;
+      --warning-bg: #faebdd;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      background: var(--bg-main);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.95;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.95);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .countdown {
+      display: inline-block;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.75rem;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.5);
+      margin-top: 1rem;
+      letter-spacing: -0.02em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .countdown.arrived {
+      background: rgba(16, 185, 129, 0.3);
+      border-color: rgba(16, 185, 129, 0.6);
+    }
+
+    .hero-subtitle a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      transition: border-color 0.2s;
+    }
+
+    .hero-subtitle a:hover {
+      border-bottom-color: white;
+    }
+
+    .name-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-main);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .name-bar input {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .name-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-bg);
+    }
+
+    .name-bar button {
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .name-bar button:hover {
+      background: #1a6dc4;
+    }
+
+    .name-display {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .change-name {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .change-name:hover {
+      color: var(--text-secondary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .day-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      padding: 0.5rem 0;
+      scrollbar-width: none;
+    }
+
+    .day-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-tab {
+      flex-shrink: 0;
+      padding: 0.625rem 1.25rem;
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .day-tab:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-hover);
+    }
+
+    .day-tab.active {
+      background: var(--text-primary);
+      color: white;
+      border-color: var(--text-primary);
+    }
+
+    .day-tab.overview.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .day-tab small {
+      display: block;
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-top: 0.125rem;
+      font-weight: 400;
+    }
+
+    .overview-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .overview-card {
+      background: var(--bg-main);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .overview-card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mini-day-card {
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--border-dark);
+      font-size: 0.875rem;
+    }
+
+    .mini-day-card.highlight {
+      border-left-color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    @media (min-width: 768px) {
+      .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .day-panel {
+      display: none;
+    }
+
+    .day-panel.active {
+      display: block;
+    }
+
+    .section {
+      background: var(--bg-main);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-title {
+      color: var(--text-primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+
+    .weather-callout {
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 2px solid var(--warning);
+      margin-bottom: 1rem;
+    }
+
+    .weather-callout.good-weather {
+      background: linear-gradient(135deg, #e6f7ef 0%, #ccf0dd 100%);
+      border-color: var(--success);
+    }
+
+    .weather-callout.rainy-weather {
+      background: linear-gradient(135deg, #e8f3ff 0%, #d4e9ff 100%);
+      border-color: var(--accent);
+    }
+
+    .weather-callout-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .weather-main {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .weather-temps {
+      display: flex;
+      gap: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .weather-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+    }
+
+    .weather-description strong {
+      color: var(--text-primary);
+    }
+
+    .weather-rank {
+      display: inline-block;
+      background: rgba(255,255,255,0.7);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    .tide-callout {
+      background: linear-gradient(135deg, #e8f3ff 0%, #d4e9ff 100%);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .tide-callout-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tide-time {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .tide-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tide-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .tide-description strong {
+      color: var(--text-primary);
+    }
+
+    .meal-card {
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .meal-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .meal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .meal-content {
+      margin-left: 2rem;
+    }
+
+    .meal-status {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .meal-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .meal-claim-input {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .meal-claim-input input {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.875rem;
+      background: var(--bg-main);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .meal-claim-input input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-bg);
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.15s ease;
+      min-height: 36px;
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2c2a26;
+    }
+
+    .btn-secondary {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e6e5e2;
+      border-color: var(--border-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+    }
+
+    .activity-card {
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .activity-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .activity-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .activity-info {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .activity-title a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .activity-title a:hover {
+      opacity: 0.8;
+    }
+
+    .activity-meta {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      font-weight: 400;
+    }
+
+    .activity-description {
+      margin: 0.75rem 0;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .activity-votes {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      align-items: center;
+    }
+
+    .vote-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .vote-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-hover);
+    }
+
+    .vote-btn.voted {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .vote-btn.voted.downvote {
+      background: #fee;
+      border-color: #e57373;
+      color: #c62828;
+    }
+
+    .vote-count {
+      font-weight: 600;
+    }
+
+    .add-activity-btn {
+      width: 100%;
+      padding: 0.875rem;
+      background: var(--bg-main);
+      color: var(--text-secondary);
+      border: 1px dashed var(--border-hover);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+
+    .add-activity-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--text-tertiary);
+      color: var(--text-primary);
+    }
+
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .event-chip {
+      background: var(--bg-secondary);
+      padding: 0.875rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .event-chip:hover {
+      border-color: var(--border-hover);
+    }
+
+    .event-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+    }
+
+    .event-meta {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .event-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      margin-top: 0.375rem;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .event-link:hover {
+      opacity: 0.8;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+    }
+
+    .modal-header {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 0.625rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-family: inherit;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-bg);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .modal-actions button {
+      flex: 1;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--text-primary);
+      color: white;
+      padding: 0.875rem 1.25rem;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      z-index: 2000;
+      animation: slideIn 0.2s ease-out;
+      max-width: 400px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .setup-wizard {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-secondary);
+      z-index: 3000;
+      overflow-y: auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .setup-wizard.active {
+      display: block;
+    }
+
+    .setup-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .setup-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .setup-header h1 {
+      color: var(--text-primary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+    }
+
+    .setup-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .setup-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .setup-step {
+      background: var(--bg-main);
+      border-radius: 8px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text-primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-right: 0.75rem;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .setup-step p, .setup-step ul {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .setup-step ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .setup-step li {
+      margin: 0.5rem 0;
+    }
+
+    .code-block {
+      background: #2c2a26;
+      color: #e8e6e3;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      margin: 1rem 0;
+      white-space: pre;
+      border: 1px solid var(--border);
+    }
+
+    .setup-input-group {
+      margin: 1rem 0;
+    }
+
+    .setup-input-group input {
+      width: 100%;
+      padding: 0.625rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .setup-input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-bg);
+    }
+
+    .demo-link {
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: inline-block;
+      font-size: 0.875rem;
+      transition: opacity 0.2s;
+    }
+
+    .demo-link:hover {
+      opacity: 0.8;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-tertiary);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      .hero {
+        height: 180px;
+      }
+
+      .hero-title {
+        font-size: 1.75rem;
+      }
+
+      .hero-overlay {
+        padding: 1.5rem;
+      }
+
+      .section {
+        padding: 1.25rem;
+      }
+
+      .modal {
+        padding: 1.5rem;
+      }
+
+      .toast {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+      }
+
+      .name-bar {
+        padding: 0.75rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1600&h=400&fit=crop" alt="Cannon Beach" />
+    <div class="hero-overlay">
+      <div class="hero-title">Cannon Beach 2026</div>
+      <div class="hero-subtitle">April 1–5 • Albright Family • <a href="https://www.airbnb.com/trips/shared/f5d23260-5c2a-4e4e-93eb-0b1afc053cb9?confCode=HM5ZSTHQQK&principal_token=5393c2df-8fe1-4671-a20f-9440ea76f72f&s=67&unique_share_id=c9e192b7-1687-4510-b1a3-65204714395b" target="_blank">View Airbnb</a></div>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </div>
+
+  <div class="name-bar" id="nameBar">
+    <span class="name-display" id="nameDisplay" style="display:none;">
+      <strong id="nameText"></strong>
+      <a class="change-name" onclick="changeName()">change</a>
+    </span>
+    <div id="nameInputGroup" style="display:flex; align-items:center; gap:0.75rem; flex:1;">
+      <label for="nameInput" style="white-space:nowrap; font-size:0.875rem; color: var(--text-secondary);">Your name:</label>
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button onclick="saveName()">Continue</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="day-tabs" id="dayTabs"></div>
+    <div id="dayPanels"></div>
+  </div>
+
+  <!-- Suggest Activity Modal -->
+  <div class="modal-backdrop" id="suggestModal">
+    <div class="modal">
+      <div class="modal-header">Suggest an Activity</div>
+      <form id="suggestForm" onsubmit="handleSuggestSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Activity Title</label>
+          <input type="text" class="form-input" id="activityTitle" placeholder="e.g., Beach volleyball" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (optional)</label>
+          <textarea class="form-textarea" id="activityDescription" placeholder="Any details..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Link (optional)</label>
+          <input type="url" class="form-input" id="activityLink" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Which day?</label>
+          <select class="form-select" id="activityDay" required>
+            <option value="any">Any day</option>
+            <option value="1">Day 1 – Wed, Apr 1</option>
+            <option value="2">Day 2 – Thu, Apr 2</option>
+            <option value="3">Day 3 – Fri, Apr 3</option>
+            <option value="4">Day 4 – Sat, Apr 4</option>
+            <option value="5">Day 5 – Sun, Apr 5</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-outline" onclick="closeSuggestModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Add Activity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Setup Wizard -->
+  <div class="setup-wizard" id="setupWizard">
+    <div class="setup-content">
+      <div class="setup-header">
+        <h1>Welcome to Cannon Beach 2026</h1>
+        <p>Set up your trip planner in 3 steps</p>
+      </div>
+
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-title">
+            <span class="step-number">1</span>
+            Create Your Google Sheet
+          </div>
+          <p>Create a new Google Sheet with these tabs:</p>
+          <ul>
+            <li><strong>activities</strong> — columns: id, day, title, description, link, suggestedBy, upvotes, downvotes, timestamp</li>
+            <li><strong>meals</strong> — columns: id, day, mealType, claimedBy, description, isDYOT, timestamp</li>
+            <li><strong>config</strong> — columns: key, value</li>
+          </ul>
+          <p>Add headers or let the script do it for you.</p>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-title">
+            <span class="step-number">2</span>
+            Add the Apps Script
+          </div>
+          <p>In your Google Sheet: <strong>Extensions → Apps Script</strong></p>
+          <p>Replace the code and deploy as <strong>Web app</strong> (Execute as: Me, Access: Anyone):</p>
+          <div class="code-block">// Cannon Beach 2026 - Google Apps Script Backend
+
+function doGet(e) {
+  return handleRequest(e);
+}
+
+function doPost(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  const action = e.parameter.action || 'getData';
+
+  try {
+    let result;
+    switch(action) {
+      case 'getData':
+        result = getData();
+        break;
+      case 'claimMeal':
+        result = claimMeal(e.parameter);
+        break;
+      case 'unclaimMeal':
+        result = unclaimMeal(e.parameter);
+        break;
+      case 'suggestActivity':
+        result = suggestActivity(e.parameter);
+        break;
+      case 'voteActivity':
+        result = voteActivity(e.parameter);
+        break;
+      default:
+        result = {success: false, error: 'Unknown action'};
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch(error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({success: false, error: error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function getData() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // Get activities
+  const activitiesSheet = getOrCreateSheet(ss, 'activities',
+    ['id', 'day', 'title', 'description', 'link', 'suggestedBy', 'upvotes', 'downvotes', 'timestamp']);
+  const activitiesData = activitiesSheet.getDataRange().getValues();
+  const activities = dataToObjects(activitiesData);
+
+  // Get meals
+  const mealsSheet = getOrCreateSheet(ss, 'meals',
+    ['id', 'day', 'mealType', 'claimedBy', 'description', 'isDYOT', 'timestamp']);
+  const mealsData = mealsSheet.getDataRange().getValues();
+  let meals = dataToObjects(mealsData);
+
+  // If meals are empty, seed them
+  if (meals.length === 0) {
+    seedMeals(mealsSheet);
+    meals = dataToObjects(mealsSheet.getDataRange().getValues());
+  }
+
+  return {
+    success: true,
+    activities: activities,
+    meals: meals
+  };
+}
+
+function claimMeal(params) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('meals');
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const idCol = headers.indexOf('id');
+  const claimedByCol = headers.indexOf('claimedBy');
+  const descCol = headers.indexOf('description');
+  const isDYOTCol = headers.indexOf('isDYOT');
+  const timestampCol = headers.indexOf('timestamp');
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][idCol] == params.id) {
+      sheet.getRange(i + 1, claimedByCol + 1).setValue(params.claimedBy || '');
+      sheet.getRange(i + 1, descCol + 1).setValue(params.description || '');
+      sheet.getRange(i + 1, isDYOTCol + 1).setValue(params.isDYOT === 'true' ? 'TRUE' : 'FALSE');
+      sheet.getRange(i + 1, timestampCol + 1).setValue(new Date());
+      return {success: true};
+    }
+  }
+
+  return {success: false, error: 'Meal not found'};
+}
+
+function unclaimMeal(params) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('meals');
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const idCol = headers.indexOf('id');
+  const claimedByCol = headers.indexOf('claimedBy');
+  const descCol = headers.indexOf('description');
+  const isDYOTCol = headers.indexOf('isDYOT');
+  const timestampCol = headers.indexOf('timestamp');
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][idCol] == params.id) {
+      sheet.getRange(i + 1, claimedByCol + 1).setValue('');
+      sheet.getRange(i + 1, descCol + 1).setValue('');
+      sheet.getRange(i + 1, isDYOTCol + 1).setValue('FALSE');
+      sheet.getRange(i + 1, timestampCol + 1).setValue(new Date());
+      return {success: true};
+    }
+  }
+
+  return {success: false, error: 'Meal not found'};
+}
+
+function suggestActivity(params) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('activities');
+
+  const id = 'act_' + new Date().getTime();
+  const row = [
+    id,
+    params.day,
+    params.title,
+    params.description || '',
+    params.link || '',
+    params.suggestedBy,
+    '',
+    '',
+    new Date()
+  ];
+
+  sheet.appendRow(row);
+  return {success: true, id: id};
+}
+
+function voteActivity(params) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('activities');
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const idCol = headers.indexOf('id');
+  const upvotesCol = headers.indexOf('upvotes');
+  const downvotesCol = headers.indexOf('downvotes');
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][idCol] == params.id) {
+      let upvotes = data[i][upvotesCol] ? data[i][upvotesCol].toString().split(',').map(p => p.trim()).filter(p => p) : [];
+      let downvotes = data[i][downvotesCol] ? data[i][downvotesCol].toString().split(',').map(p => p.trim()).filter(p => p) : [];
+
+      // Remove from both lists first
+      upvotes = upvotes.filter(u => u !== params.name);
+      downvotes = downvotes.filter(d => d !== params.name);
+
+      // Add to the appropriate list
+      if (params.vote === 'up') {
+        upvotes.push(params.name);
+      } else if (params.vote === 'down') {
+        downvotes.push(params.name);
+      }
+      // If vote is 'remove', just leave it out of both lists
+
+      sheet.getRange(i + 1, upvotesCol + 1).setValue(upvotes.join(', '));
+      sheet.getRange(i + 1, downvotesCol + 1).setValue(downvotes.join(', '));
+      return {success: true};
+    }
+  }
+
+  return {success: false, error: 'Activity not found'};
+}
+
+function getOrCreateSheet(ss, name, headers) {
+  let sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+  }
+  return sheet;
+}
+
+function seedMeals(sheet) {
+  const mealTypes = ['Breakfast', 'Lunch', 'Dinner'];
+  for (let day = 1; day <= 5; day++) {
+    for (let mealType of mealTypes) {
+      const id = `meal_${day}_${mealType.toLowerCase()}`;
+      sheet.appendRow([id, day, mealType, '', '', 'FALSE', new Date()]);
+    }
+  }
+}
+
+function dataToObjects(data) {
+  if (data.length < 2) return [];
+  const headers = data[0];
+  const rows = data.slice(1);
+  return rows.map(row => {
+    const obj = {};
+    headers.forEach((header, i) => {
+      obj[header] = row[i];
+    });
+    return obj;
+  }).filter(obj => obj.id);
+}</div>
+          <p style="margin-top: 1rem;">Copy the <strong>Web app URL</strong> after deploying.</p>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-title">
+            <span class="step-number">3</span>
+            Connect Your App
+          </div>
+          <div class="setup-input-group">
+            <label for="scriptUrlInput" class="form-label">Paste your Apps Script Web App URL:</label>
+            <input type="url" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
+            <button class="btn-primary" onclick="saveScriptUrl()" style="width: 100%; margin-top: 0.5rem;">
+              Connect
+            </button>
+          </div>
+          <a class="demo-link" onclick="enterDemoMode()">Or preview in demo mode</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== CONFIG & CONSTANTS =====
+    const DAYS = [
+      { num: 1, date: 'Wed, Apr 1', full: '2026-04-01' },
+      { num: 2, date: 'Thu, Apr 2', full: '2026-04-02' },
+      { num: 3, date: 'Fri, Apr 3', full: '2026-04-03' },
+      { num: 4, date: 'Sat, Apr 4', full: '2026-04-04' },
+      { num: 5, date: 'Sun, Apr 5', full: '2026-04-05' }
+    ];
+
+    const MEAL_TYPES = ['Breakfast', 'Lunch', 'Dinner'];
+    const MEAL_EMOJIS = { Breakfast: '🌅', Lunch: '🥪', Dinner: '🌊' };
+
+    const WMO_CODES = {
+      0: { label: 'Clear', emoji: '☀️' },
+      1: { label: 'Mostly Clear', emoji: '🌤' },
+      2: { label: 'Partly Cloudy', emoji: '⛅' },
+      3: { label: 'Overcast', emoji: '☁️' },
+      45: { label: 'Foggy', emoji: '🌫' },
+      48: { label: 'Foggy', emoji: '🌫' },
+      51: { label: 'Light Drizzle', emoji: '🌦' },
+      53: { label: 'Drizzle', emoji: '🌦' },
+      55: { label: 'Heavy Drizzle', emoji: '🌧' },
+      61: { label: 'Light Rain', emoji: '🌧' },
+      63: { label: 'Rain', emoji: '🌧' },
+      65: { label: 'Heavy Rain', emoji: '🌧' },
+      71: { label: 'Light Snow', emoji: '🌨' },
+      73: { label: 'Snow', emoji: '🌨' },
+      75: { label: 'Heavy Snow', emoji: '🌨' },
+      80: { label: 'Rain Showers', emoji: '🌦' },
+      81: { label: 'Rain Showers', emoji: '🌦' },
+      82: { label: 'Heavy Showers', emoji: '🌧' },
+      95: { label: 'Thunderstorm', emoji: '⛈' },
+      96: { label: 'Thunderstorm', emoji: '⛈' },
+      99: { label: 'Thunderstorm', emoji: '⛈' }
+    };
+
+    const CANNON_BEACH_COORDS = { lat: 45.8918, lon: -123.9615 };
+
+
+    // ===== STATE =====
+    const urlParam = new URLSearchParams(location.search).get('src');
+    let SCRIPT_URL = urlParam || localStorage.getItem('cb26_scriptUrl') || '';
+    if (urlParam) localStorage.setItem('cb26_scriptUrl', urlParam);
+
+    let userName = localStorage.getItem('cb26_userName') || '';
+    let appData = { activities: [], meals: [] };
+    let weatherData = {};
+    let tideData = {};
+    let activeDay = 'overview'; // Start with overview
+    let isDemoMode = false;
+
+    // ===== SETUP WIZARD =====
+    function checkSetup() {
+      if (!SCRIPT_URL) {
+        document.getElementById('setupWizard').classList.add('active');
+        return false;
+      }
+      return true;
+    }
+
+    async function saveScriptUrl() {
+      console.log('saveScriptUrl function called');
+      const input = document.getElementById('scriptUrlInput');
+      console.log('Input element:', input);
+      const url = input.value.trim();
+      console.log('URL value:', url);
+
+      if (!url) {
+        alert('Please enter a valid URL');
+        showToast('Please enter a valid URL');
+        return;
+      }
+
+      alert('Testing connection to: ' + url);
+      showToast('Testing connection...');
+
+      try {
+        console.log('Fetching from:', url + '?action=getData');
+        const response = await fetch(url + '?action=getData');
+        console.log('Response:', response);
+        const data = await response.json();
+        console.log('Data:', data);
+
+        if (data.success) {
+          SCRIPT_URL = url;
+          localStorage.setItem('cb26_scriptUrl', url);
+          document.getElementById('setupWizard').classList.remove('active');
+          alert('Connected successfully!');
+          showToast('Connected successfully!');
+          init();
+        } else {
+          alert('Connection failed. Check your URL and make sure the script is deployed correctly.');
+          showToast('Connection failed. Check your URL.');
+        }
+      } catch (error) {
+        console.error('Connection error:', error);
+        alert('Connection error: ' + error.message);
+        showToast('Connection error: ' + error.message);
+      }
+    }
+
+    async function enterDemoMode() {
+      isDemoMode = true;
+      SCRIPT_URL = 'DEMO';
+      appData = getDemoData();
+      document.getElementById('setupWizard').classList.remove('active');
+      showToast('Viewing demo data');
+
+      // Update countdown
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+
+      // Fetch weather and tides even in demo mode
+      await Promise.all([
+        fetchWeather(),
+        fetchTides()
+      ]);
+
+      renderAll();
+    }
+
+    function getDemoData() {
+      return {
+        activities: [
+          { id: '1', day: '1', title: 'Beach walk to Haystack Rock', description: 'Best at low tide - check out the tide pools!', link: 'https://www.cannonbeach.org/explore-cannon-beach/haystack-rock/', suggestedBy: 'Mom', upvotes: 'Mom, Dad, Emma', downvotes: '' },
+          { id: '2', day: 'any', title: 'Downtown art galleries', description: 'Explore local art scene', link: 'https://www.cannonbeach.org/things-to-do/galleries/', suggestedBy: 'Aunt Sarah', upvotes: 'Aunt Sarah, Emma', downvotes: '' },
+          { id: '3', day: '3', title: 'Hike at Ecola State Park', description: 'Scenic coastal trail with amazing views', link: 'https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=136', suggestedBy: 'Dad', upvotes: 'Dad, Uncle Mike', downvotes: 'Tom' }
+        ],
+        meals: Array.from({ length: 15 }, (_, i) => ({
+          id: `meal_${Math.floor(i / 3) + 1}_${MEAL_TYPES[i % 3].toLowerCase()}`,
+          day: String(Math.floor(i / 3) + 1),
+          mealType: MEAL_TYPES[i % 3],
+          claimedBy: i === 1 ? 'Mom' : '',
+          description: i === 1 ? 'Making sandwiches for the beach' : i === 4 ? 'restaurant:Pelican Brewing' : '',
+          isDYOT: i === 7 ? 'TRUE' : 'FALSE'
+        }))
+      };
+    }
+
+    // ===== API LAYER =====
+    async function fetchData() {
+      if (isDemoMode) {
+        appData = getDemoData();
+        return;
+      }
+
+      if (!SCRIPT_URL) return;
+
+      try {
+        const response = await fetch(SCRIPT_URL + '?action=getData');
+        const data = await response.json();
+
+        if (data.success) {
+          appData = data;
+        } else {
+          showToast('Failed to load data');
+        }
+      } catch (error) {
+        showToast('Network error: ' + error.message);
+      }
+    }
+
+    async function apiPost(action, params) {
+      if (isDemoMode) {
+        showToast('Demo mode - changes not saved');
+        return { success: true };
+      }
+
+      const formData = new URLSearchParams();
+      formData.append('action', action);
+      for (const key in params) {
+        formData.append(key, params[key]);
+      }
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      });
+
+      return await response.json();
+    }
+
+    async function claimMeal(mealId, claimedBy, description, isDYOT = false) {
+      const meal = appData.meals.find(m => m.id === mealId);
+      if (meal) {
+        const backup = { ...meal };
+        meal.claimedBy = claimedBy;
+        meal.description = description;
+        meal.isDYOT = isDYOT ? 'TRUE' : 'FALSE';
+        renderAll();
+
+        try {
+          const result = await apiPost('claimMeal', {
+            id: mealId,
+            claimedBy,
+            description,
+            isDYOT: isDYOT ? 'true' : 'false'
+          });
+
+          if (!result.success) {
+            Object.assign(meal, backup);
+            renderAll();
+            showToast('Failed to claim meal');
+          } else {
+            showToast('Meal claimed!');
+          }
+        } catch (error) {
+          Object.assign(meal, backup);
+          renderAll();
+          showToast('Error: ' + error.message);
+        }
+      }
+    }
+
+    async function unclaimMeal(mealId) {
+      const meal = appData.meals.find(m => m.id === mealId);
+      if (meal) {
+        const backup = { ...meal };
+        meal.claimedBy = '';
+        meal.description = '';
+        meal.isDYOT = 'FALSE';
+        renderAll();
+
+        try {
+          const result = await apiPost('unclaimMeal', { id: mealId });
+
+          if (!result.success) {
+            Object.assign(meal, backup);
+            renderAll();
+            showToast('Failed to unclaim meal');
+          } else {
+            showToast('Meal unclaimed');
+          }
+        } catch (error) {
+          Object.assign(meal, backup);
+          renderAll();
+          showToast('Error: ' + error.message);
+        }
+      }
+    }
+
+    async function suggestActivity(activityData) {
+      const newActivity = {
+        id: 'temp_' + Date.now(),
+        ...activityData,
+        upvotes: '',
+        downvotes: ''
+      };
+
+      appData.activities.push(newActivity);
+      renderAll();
+
+      try {
+        const result = await apiPost('suggestActivity', activityData);
+
+        if (result.success) {
+          newActivity.id = result.id;
+          showToast('Activity suggested!');
+        } else {
+          appData.activities = appData.activities.filter(a => a.id !== newActivity.id);
+          renderAll();
+          showToast('Failed to suggest activity');
+        }
+      } catch (error) {
+        appData.activities = appData.activities.filter(a => a.id !== newActivity.id);
+        renderAll();
+        showToast('Error: ' + error.message);
+      }
+    }
+
+    async function voteActivity(activityId, vote) {
+      const activity = appData.activities.find(a => a.id === activityId);
+      if (activity) {
+        const backup = {
+          upvotes: activity.upvotes,
+          downvotes: activity.downvotes
+        };
+
+        let upvotes = activity.upvotes ? activity.upvotes.split(', ').filter(u => u.trim()) : [];
+        let downvotes = activity.downvotes ? activity.downvotes.split(', ').filter(d => d.trim()) : [];
+
+        // Remove from both first
+        upvotes = upvotes.filter(u => u !== userName);
+        downvotes = downvotes.filter(d => d !== userName);
+
+        // Add to appropriate list
+        if (vote === 'up') {
+          upvotes.push(userName);
+        } else if (vote === 'down') {
+          downvotes.push(userName);
+        }
+
+        activity.upvotes = upvotes.join(', ');
+        activity.downvotes = downvotes.join(', ');
+        renderAll();
+
+        try {
+          const result = await apiPost('voteActivity', {
+            id: activityId,
+            name: userName,
+            vote: vote
+          });
+
+          if (!result.success) {
+            activity.upvotes = backup.upvotes;
+            activity.downvotes = backup.downvotes;
+            renderAll();
+            showToast('Failed to vote');
+          }
+        } catch (error) {
+          activity.upvotes = backup.upvotes;
+          activity.downvotes = backup.downvotes;
+          renderAll();
+          showToast('Error: ' + error.message);
+        }
+      }
+    }
+
+    // ===== WEATHER API =====
+    async function fetchWeather() {
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${CANNON_BEACH_COORDS.lat}&longitude=${CANNON_BEACH_COORDS.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles&forecast_days=10`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        console.log('Weather API response:', data);
+
+        if (data.daily && data.daily.time) {
+          DAYS.forEach(day => {
+            const index = data.daily.time.indexOf(day.full);
+            console.log(`Looking for ${day.full}, found at index: ${index}`);
+            if (index !== -1) {
+              weatherData[day.num] = {
+                high: Math.round(data.daily.temperature_2m_max[index]),
+                low: Math.round(data.daily.temperature_2m_min[index]),
+                precipitation: data.daily.precipitation_probability_max[index],
+                code: data.daily.weathercode[index]
+              };
+            }
+          });
+        }
+
+        // If no weather data was populated, use fallback
+        if (Object.keys(weatherData).length === 0) {
+          console.log('Using fallback weather data');
+          useFallbackWeather();
+        }
+      } catch (error) {
+        console.error('Weather fetch error:', error);
+        useFallbackWeather();
+      }
+    }
+
+    function useFallbackWeather() {
+      // Fallback weather data for April in Cannon Beach
+      weatherData = {
+        1: { high: 56, low: 45, precipitation: 40, code: 2 },
+        2: { high: 58, low: 46, precipitation: 35, code: 1 },
+        3: { high: 54, low: 44, precipitation: 60, code: 61 },
+        4: { high: 57, low: 45, precipitation: 30, code: 2 },
+        5: { high: 59, low: 47, precipitation: 25, code: 1 }
+      };
+    }
+
+    async function fetchTides() {
+      try {
+        const startDate = '20260401';
+        const endDate = '20260405';
+        const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${startDate}&end_date=${endDate}&station=9437540&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&format=json`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.predictions) {
+          DAYS.forEach(day => {
+            const dayPredictions = data.predictions.filter(pred => {
+              const predDate = pred.t.split(' ')[0];
+              return predDate === day.full;
+            });
+
+            const lowTides = dayPredictions.filter(pred => pred.type === 'L');
+            if (lowTides.length > 0) {
+              // Store all low tides for the day
+              tideData[day.num] = lowTides.map(tide => ({
+                time: tide.t.split(' ')[1],
+                height: parseFloat(tide.v).toFixed(1)
+              }));
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Tide fetch error:', error);
+        // Fallback with typical two low tides per day
+        tideData = {
+          1: [{ time: '06:15', height: '0.2' }, { time: '18:45', height: '0.5' }],
+          2: [{ time: '07:00', height: '0.4' }, { time: '19:30', height: '0.6' }],
+          3: [{ time: '07:45', height: '0.1' }, { time: '20:15', height: '0.4' }],
+          4: [{ time: '08:30', height: '0.3' }, { time: '21:00', height: '0.7' }],
+          5: [{ time: '09:15', height: '0.5' }, { time: '21:45', height: '0.8' }]
+        };
+      }
+    }
+
+    function getWeatherIcon(code) {
+      return WMO_CODES[code] || WMO_CODES[0];
+    }
+
+    function rankWeatherDays() {
+      // Calculate weather score for each day (higher is better)
+      const scores = DAYS.map(day => {
+        const weather = weatherData[day.num];
+        if (!weather) return { day: day.num, score: 0 };
+
+        let score = 100;
+
+        // Temperature score (optimal around 55-65°F)
+        const avgTemp = (weather.high + weather.low) / 2;
+        if (avgTemp >= 55 && avgTemp <= 65) {
+          score += 20;
+        } else if (avgTemp >= 50 && avgTemp < 55) {
+          score += 10;
+        } else if (avgTemp > 65 && avgTemp <= 70) {
+          score += 10;
+        }
+
+        // Precipitation penalty
+        score -= weather.precipitation * 0.5;
+
+        // Weather code bonus (clear/partly cloudy is best)
+        if (weather.code <= 2) {
+          score += 20;
+        } else if (weather.code === 3) {
+          score += 5;
+        } else if (weather.code >= 61) {
+          score -= 10;
+        }
+
+        return { day: day.num, score: score };
+      });
+
+      // Sort by score (descending) and assign ranks
+      scores.sort((a, b) => b.score - a.score);
+      const ranked = {};
+      scores.forEach((item, index) => {
+        ranked[item.day] = {
+          rank: index + 1,
+          total: scores.length
+        };
+      });
+
+      return ranked;
+    }
+
+    function getTideContext(day, tides) {
+      // Collect all tides from all days
+      const allTides = [];
+      DAYS.forEach(d => {
+        const dayTides = tideData[d.num];
+        if (dayTides && dayTides.length > 0) {
+          dayTides.forEach(t => {
+            allTides.push({
+              day: d.num,
+              height: parseFloat(t.height),
+              time: t.time
+            });
+          });
+        }
+      });
+
+      // Sort by height (ascending - lower is better)
+      allTides.sort((a, b) => a.height - b.height);
+
+      // Find ranks of current day's tides
+      const currentTides = tides.map(t => parseFloat(t.height));
+      const lowestToday = Math.min(...currentTides);
+      const highestToday = Math.max(...currentTides);
+
+      // Find rank of best tide today
+      const bestTideRank = allTides.findIndex(t => t.height === lowestToday && t.day === day) + 1;
+
+      let description = '<strong>Perfect time for tidepooling!</strong> ';
+
+      // Special handling for Day 1 (arriving late afternoon)
+      if (day === 1 && tides.length > 1) {
+        const morning = tides[0];
+        const evening = tides[1];
+        const morningHeight = parseFloat(morning.height);
+        const eveningHeight = parseFloat(evening.height);
+
+        description += `Since you're arriving late afternoon, you'll catch the <strong>${evening.time} tide (${evening.height} ft)</strong>. `;
+
+        if (morningHeight < eveningHeight) {
+          const diff = (eveningHeight - morningHeight).toFixed(1);
+          description += `The ${morning.time} morning tide would have been ${diff} ft lower, but the evening window is still great for your first beach experience! `;
+        } else {
+          description += `This is actually the better of the two low tides today! `;
+        }
+      }
+      // Special handling for Day 5 (leaving in the morning)
+      else if (day === 5 && tides.length > 1) {
+        const morning = tides[0];
+        const evening = tides[1];
+        const morningHeight = parseFloat(morning.height);
+        const eveningHeight = parseFloat(evening.height);
+
+        description += `Since you're departing in the morning, the <strong>${morning.time} tide (${morning.height} ft)</strong> is your last chance for tidepooling. `;
+
+        if (morningHeight < eveningHeight) {
+          description += `Good timing—this is the better of the two low tides today! Make it count for your final beach morning. `;
+        } else {
+          const diff = (morningHeight - eveningHeight).toFixed(1);
+          description += `The evening tide would be ${diff} ft lower, but you'll still have a great final morning at the beach. `;
+        }
+      }
+      // Regular days - explain which tide is better if there are multiple
+      else if (tides.length > 1) {
+        const morning = tides[0];
+        const evening = tides[1];
+        const morningHeight = parseFloat(morning.height);
+        const eveningHeight = parseFloat(evening.height);
+
+        if (morningHeight < eveningHeight) {
+          const diff = (eveningHeight - morningHeight).toFixed(1);
+          description += `The <strong>${morning.time} tide (${morning.height} ft)</strong> is the better window today—${diff} ft lower than the evening tide, meaning more area exposed for exploration. `;
+        } else if (eveningHeight < morningHeight) {
+          const diff = (morningHeight - eveningHeight).toFixed(1);
+          description += `The <strong>${evening.time} tide (${evening.height} ft)</strong> is the better window today—${diff} ft lower than the morning tide, meaning more area exposed for exploration. `;
+        } else {
+          description += `Both tides are equally good today at ${morning.height} ft. `;
+        }
+      }
+
+      // Compare to other days
+      if (bestTideRank === 1) {
+        description += `<strong>This is the lowest tide of your entire trip!</strong> You'll see the most exposed tide pools and marine life. Don't miss this one!`;
+      } else if (bestTideRank <= 3) {
+        description += `This ranks <strong>#${bestTideRank} of the ${allTides.length} low tides</strong> during your trip—excellent tidepooling conditions with lots of exposed areas to explore.`;
+      } else if (bestTideRank <= Math.floor(allTides.length / 2)) {
+        description += `This is a <strong>good tidepooling day</strong> (ranked #${bestTideRank} of ${allTides.length} low tides). You'll still see plenty of sea life, though not quite as much area exposed as the very lowest tides.`;
+      } else {
+        description += `This is a <strong>moderate tide</strong> (ranked #${bestTideRank} of ${allTides.length}). While not the lowest, you'll still find interesting tide pools—just stick closer to the base of Haystack Rock.`;
+      }
+
+      description += ' Head to Haystack Rock 1-2 hours before or after low tide for the best viewing.';
+
+      return description;
+    }
+
+    function getWeatherContext(day) {
+      const weather = weatherData[day];
+      const ranks = rankWeatherDays();
+      const rank = ranks[day];
+      const icon = getWeatherIcon(weather.code);
+
+      let description = '';
+      let contextClass = '';
+
+      // Determine if it's rainy
+      const isRainy = weather.precipitation >= 50 || weather.code >= 61;
+      const isClear = weather.code <= 2 && weather.precipitation < 30;
+
+      // Day 1 - Arrival day context
+      if (day === 1) {
+        description = `<strong>Arrival day!</strong> ${icon.label.toLowerCase()} with ${weather.precipitation}% chance of rain. `;
+        if (isClear) {
+          contextClass = 'good-weather';
+          description += "You're arriving late afternoon to beautiful conditions—perfect for settling in and taking an evening beach stroll.";
+        } else if (isRainy) {
+          contextClass = 'rainy-weather';
+          description += "Rain is expected, but you'll mostly be arriving and settling in. Tomorrow's forecast will guide your first full day of adventures!";
+        } else {
+          contextClass = '';
+          description += "You'll arrive late afternoon with time to unpack and explore the neighborhood before dinner.";
+        }
+      }
+      // Day 5 - Departure day context
+      else if (day === 5) {
+        description = `<strong>Departure day</strong> with ${icon.label.toLowerCase()}. ${weather.precipitation}% chance of rain. `;
+        if (isClear) {
+          contextClass = 'good-weather';
+          description += "Your morning departure will be blessed with beautiful weather—perfect for one last beach walk and photos before heading home.";
+        } else if (isRainy) {
+          contextClass = 'rainy-weather';
+          description += "Morning rain is in the forecast, but you'll be packing up and heading out. It'll make you appreciate all the beautiful moments from earlier in the trip!";
+        } else {
+          contextClass = '';
+          description += "Leaving in the morning, so you'll have time for a final breakfast together before hitting the road.";
+        }
+      }
+      // Regular full days
+      else if (rank.rank === 1) {
+        contextClass = 'good-weather';
+        description = `<strong>Best weather day of your trip!</strong> ${icon.label.toLowerCase()} with ${weather.precipitation}% chance of rain. `;
+        if (isClear) {
+          description += "Perfect conditions for beach walks, outdoor activities, and capturing those scenic photos.";
+        } else {
+          description += "Great conditions for exploring the coast.";
+        }
+      } else if (rank.rank === rank.total) {
+        if (isRainy) {
+          contextClass = 'rainy-weather';
+          description = `<strong>Wettest day of your trip</strong> – but don't let that stop you! ${weather.precipitation}% chance of rain. `;
+          description += "Throw on your rain gear and embrace the moody Pacific Northwest vibes. Stormy beaches are magical, and the dramatic waves make for incredible photos. Plus, rainy days mean fewer crowds at local spots.";
+        } else {
+          contextClass = '';
+          description = `<strong>Coolest day of your trip</strong> with ${icon.label.toLowerCase()}. ${weather.precipitation}% chance of rain. `;
+          description += "Layer up and enjoy the authentic Oregon coast experience!";
+        }
+      } else {
+        if (isRainy) {
+          contextClass = 'rainy-weather';
+          description = `<strong>Rainy conditions expected</strong> – ${weather.precipitation}% chance of rain. `;
+          description += "Don't let a little rain dampen your spirits! Rain gear is beach gear in Oregon. The coast is stunning in any weather, and you'll have the beaches more to yourself.";
+        } else if (isClear) {
+          contextClass = 'good-weather';
+          description = `<strong>Beautiful day ahead!</strong> ${icon.label.toLowerCase()} with only ${weather.precipitation}% chance of rain. `;
+          description += `This is your ${rank.rank === 2 ? 'second-' : ''}best weather day – perfect for outdoor adventures.`;
+        } else {
+          contextClass = '';
+          description = `${icon.label} with ${weather.precipitation}% chance of rain. `;
+          description += `Middle-of-the-pack weather day – typical spring conditions for the Oregon coast.`;
+        }
+      }
+
+      return { description, contextClass, icon, rank };
+    }
+
+    function renderWeatherStrip(day) {
+      const weather = weatherData[day];
+      if (!weather) return '<div class="loading">Loading weather...</div>';
+
+      const context = getWeatherContext(day);
+      const tide = tideData[day];
+
+      let html = `
+        <div class="weather-callout ${context.contextClass}">
+          <div class="weather-callout-header">
+            <span style="font-size: 2.5rem;">${context.icon.emoji}</span>
+            <div style="flex: 1;">
+              <div class="weather-main">
+                ${context.icon.label}
+              </div>
+              <div class="weather-temps">
+                <span>↑ ${weather.high}°F</span>
+                <span>↓ ${weather.low}°F</span>
+                <span>☂️ ${weather.precipitation}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="weather-description">
+            ${context.description}
+          </div>
+          ${day !== 1 && day !== 5 ? `<div class="weather-rank">Weather Rank: #${context.rank.rank} of ${context.rank.total} days</div>` : ''}
+        </div>
+      `;
+
+      if (tide && tide.length > 0) {
+        const tideContext = getTideContext(day, tide);
+
+        html += `
+          <div class="tide-callout">
+            <div class="tide-callout-header">
+              <span style="font-size: 2rem;">🌊</span>
+              <div style="flex: 1;">
+                <div class="tide-label">Low Tide${tide.length > 1 ? 's' : ''}</div>
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                  ${tide.map((t, idx) => `
+                    <div>
+                      <div class="tide-time">${t.time}</div>
+                      <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">${t.height} ft</div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="tide-description">
+              ${tideContext}
+            </div>
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
+
+    function renderEventsSection(day) {
+      const dayInfo = DAYS.find(d => d.num === day);
+      const dateStr = dayInfo ? dayInfo.date : '';
+
+      return `
+        <div class="section">
+          <div class="section-title">🔗 Resource Links</div>
+
+          <div style="display: grid; gap: 0.75rem;">
+            <div class="event-chip">
+              <div class="event-name">📅 Events Calendar</div>
+              <div class="event-meta">Check what's happening during your visit</div>
+              <a href="https://www.cannonbeach.org/events/" target="_blank" class="event-link">Cannon Beach Events →</a>
+              <a href="https://www.oregoncoast.org/events/" target="_blank" class="event-link">Oregon Coast Events →</a>
+            </div>
+
+            <div class="event-chip">
+              <div class="event-name">🏞️ Parks & Nature</div>
+              <div class="event-meta">State parks, trails, and natural attractions</div>
+              <a href="https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=136" target="_blank" class="event-link">Ecola State Park →</a>
+              <a href="https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=181" target="_blank" class="event-link">Oswald West State Park →</a>
+              <a href="https://www.cannonbeach.org/explore-cannon-beach/haystack-rock/" target="_blank" class="event-link">Haystack Rock Info →</a>
+            </div>
+
+            <div class="event-chip">
+              <div class="event-name">🎨 Arts & Culture</div>
+              <div class="event-meta">Galleries, museums, and local culture</div>
+              <a href="https://www.cannonbeach.org/things-to-do/galleries/" target="_blank" class="event-link">Art Galleries →</a>
+              <a href="https://www.cannonbeachhistory.org/" target="_blank" class="event-link">History Center →</a>
+            </div>
+
+            <div class="event-chip">
+              <div class="event-name">🍽️ Dining</div>
+              <div class="event-meta">Restaurants and local favorites</div>
+              <a href="https://www.cannonbeach.org/dining/" target="_blank" class="event-link">Dining Guide →</a>
+              <a href="https://pelicanbrewing.com/locations/cannon-beach/" target="_blank" class="event-link">Pelican Brewing →</a>
+            </div>
+
+            <div class="event-chip">
+              <div class="event-name">🎯 Attractions</div>
+              <div class="event-meta">Family-friendly activities and day trips</div>
+              <a href="https://www.seasideaquarium.com/" target="_blank" class="event-link">Seaside Aquarium →</a>
+              <a href="https://www.astoriacolumn.org/" target="_blank" class="event-link">Astoria Column →</a>
+              <a href="https://www.cannonbeach.org/things-to-do/" target="_blank" class="event-link">Things to Do Guide →</a>
+            </div>
+
+            <div class="event-chip">
+              <div class="event-name">ℹ️ Visitor Information</div>
+              <div class="event-meta">Chamber of Commerce and local resources</div>
+              <a href="https://www.cannonbeach.org/" target="_blank" class="event-link">Cannon Beach Chamber →</a>
+              <a href="https://www.cannonbeach.org/plan-your-trip/" target="_blank" class="event-link">Plan Your Trip →</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== RENDER ENGINE =====
+    function renderAll() {
+      renderDayTabs();
+      renderDayPanels();
+    }
+
+    function renderDayTabs() {
+      const overviewTab = `
+        <div class="day-tab overview ${activeDay === 'overview' ? 'active' : ''}" onclick="switchDay('overview')">
+          📋 Overview
+        </div>
+      `;
+
+      const dayTabs = DAYS.map(day => `
+        <div class="day-tab ${activeDay === day.num ? 'active' : ''}" onclick="switchDay(${day.num})">
+          Day ${day.num}<br><small>${day.date}</small>
+        </div>
+      `).join('');
+
+      document.getElementById('dayTabs').innerHTML = overviewTab + dayTabs;
+    }
+
+    function renderOverviewPanel() {
+      // Find best weather day (Days 2-4, excluding partial days)
+      const fullDays = DAYS.filter(d => d.num !== 1 && d.num !== 5);
+      const ranks = rankWeatherDays();
+      let bestWeatherDay = null;
+      let bestRank = 999;
+
+      fullDays.forEach(day => {
+        if (ranks[day.num] && ranks[day.num].rank < bestRank) {
+          bestRank = ranks[day.num].rank;
+          bestWeatherDay = day.num;
+        }
+      });
+
+      // Find lowest tide across all days
+      const allTides = [];
+      DAYS.forEach(d => {
+        const dayTides = tideData[d.num];
+        if (dayTides && dayTides.length > 0) {
+          dayTides.forEach(t => {
+            allTides.push({
+              day: d.num,
+              dayName: DAYS.find(day => day.num === d.num).date,
+              height: parseFloat(t.height),
+              time: t.time
+            });
+          });
+        }
+      });
+      allTides.sort((a, b) => a.height - b.height);
+      const lowestTide = allTides[0];
+
+      // Get meal summary
+      const mealSummary = DAYS.map(day => {
+        const dayMeals = appData.meals.filter(m => String(m.day) === String(day.num));
+        let mealTypesToShow = MEAL_TYPES;
+        if (day.num === 1) mealTypesToShow = ['Dinner'];
+        else if (day.num === 5) mealTypesToShow = ['Breakfast'];
+
+        const claimed = mealTypesToShow.filter(type => {
+          const meal = dayMeals.find(m => m.mealType === type);
+          return meal && (meal.claimedBy || meal.isDYOT === 'TRUE');
+        }).length;
+
+        return {
+          day: day.num,
+          dayName: day.date,
+          total: mealTypesToShow.length,
+          claimed
+        };
+      });
+
+      // Get top upvoted activities (at least 2 upvotes)
+      const topActivities = appData.activities
+        .map(a => {
+          const upvotes = a.upvotes ? a.upvotes.split(', ').filter(u => u.trim()).length : 0;
+          return { ...a, upvoteCount: upvotes };
+        })
+        .filter(a => a.upvoteCount >= 2)
+        .sort((a, b) => b.upvoteCount - a.upvoteCount)
+        .slice(0, 5);
+
+      return `
+        <div class="day-panel ${activeDay === 'overview' ? 'active' : ''}" id="overview">
+          <div class="overview-grid">
+            <!-- Best Weather -->
+            <div class="overview-card">
+              <div class="overview-card-title">☀️ Best Weather Day</div>
+              ${bestWeatherDay ? `
+                <div class="mini-day-card highlight">
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">Day ${bestWeatherDay} – ${DAYS.find(d => d.num === bestWeatherDay).date}</div>
+                  <div style="color: var(--text-secondary);">
+                    ${getWeatherIcon(weatherData[bestWeatherDay].code).emoji}
+                    ${getWeatherIcon(weatherData[bestWeatherDay].code).label} •
+                    ${weatherData[bestWeatherDay].high}°F / ${weatherData[bestWeatherDay].low}°F •
+                    ${weatherData[bestWeatherDay].precipitation}% rain
+                  </div>
+                  <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+                    Perfect for outdoor activities and beach time!
+                  </div>
+                </div>
+              ` : '<div class="loading">Loading weather data...</div>'}
+            </div>
+
+            <!-- Lowest Tide -->
+            <div class="overview-card">
+              <div class="overview-card-title">🌊 Best Tidepooling</div>
+              ${lowestTide ? `
+                <div class="mini-day-card highlight">
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">Day ${lowestTide.day} – ${lowestTide.dayName}</div>
+                  <div style="color: var(--text-secondary);">
+                    Low tide at <strong>${lowestTide.time}</strong> (${lowestTide.height} ft)
+                  </div>
+                  <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+                    Lowest tide of your trip - best for exploring tide pools at Haystack Rock!
+                  </div>
+                </div>
+              ` : '<div class="loading">Loading tide data...</div>'}
+            </div>
+
+            <!-- Meal Planning -->
+            <div class="overview-card">
+              <div class="overview-card-title">🍽️ Meal Planning Progress</div>
+              ${mealSummary.map(summary => `
+                <div class="mini-day-card ${summary.claimed === summary.total ? 'highlight' : ''}">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <strong>Day ${summary.day}</strong> – ${summary.dayName}
+                    </div>
+                    <div style="font-weight: 600; color: ${summary.claimed === summary.total ? 'var(--success)' : 'var(--text-tertiary)'};">
+                      ${summary.claimed}/${summary.total} planned
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Top Activities -->
+            <div class="overview-card">
+              <div class="overview-card-title">✨ Popular Activities</div>
+              ${topActivities.length > 0 ? topActivities.map(activity => `
+                <div class="mini-day-card">
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                    ${activity.link ? `<a href="${activity.link}" target="_blank" style="color: var(--accent); text-decoration: none;">${activity.title} →</a>` : activity.title}
+                  </div>
+                  <div style="color: var(--text-secondary); font-size: 0.8rem;">
+                    👍 ${activity.upvoteCount} interested • ${activity.day === 'any' ? 'Any day' : `Day ${activity.day}`}
+                  </div>
+                </div>
+              `).join('') : '<div class="empty-state">No activities with 2+ votes yet. Start voting on suggestions!</div>'}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDayPanels() {
+      const overviewHTML = renderOverviewPanel();
+
+      const dayPanelsHTML = DAYS.map(day => `
+        <div class="day-panel ${activeDay === day.num ? 'active' : ''}" id="day${day.num}">
+          ${renderWeatherStrip(day.num)}
+          ${renderMealsSection(day.num)}
+          ${renderActivitiesSection(day.num)}
+          ${renderEventsSection(day.num)}
+        </div>
+      `).join('');
+
+      document.getElementById('dayPanels').innerHTML = overviewHTML + dayPanelsHTML;
+    }
+
+    function renderMealsSection(day) {
+      const dayMeals = appData.meals.filter(m => String(m.day) === String(day));
+
+      let mealTypesToShow = MEAL_TYPES;
+      let arrivalNote = '';
+
+      if (day === 1) {
+        mealTypesToShow = ['Dinner'];
+        arrivalNote = `
+          <div style="background: var(--bg-secondary); padding: 0.875rem; border-radius: 6px; margin-bottom: 1rem; border-left: 3px solid var(--accent);">
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">
+              ℹ️ <strong>Arrival Day</strong> – Everyone will be arriving late afternoon
+            </div>
+          </div>
+        `;
+      } else if (day === 5) {
+        mealTypesToShow = ['Breakfast'];
+      }
+
+      return `
+        <div class="section">
+          <div class="section-title">🍽️ Meals</div>
+          <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+            Claim a meal, make a plan for us to go out, or let us know if you plan to do this one on your own.
+          </div>
+          ${arrivalNote}
+          ${mealTypesToShow.map(type => {
+            const meal = dayMeals.find(m => m.mealType === type) || {
+              id: `meal_${day}_${type.toLowerCase()}`,
+              day: String(day),
+              mealType: type,
+              claimedBy: '',
+              description: '',
+              isDYOT: 'FALSE'
+            };
+            return renderMealCard(meal);
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function renderMealCard(meal) {
+      const emoji = MEAL_EMOJIS[meal.mealType];
+      const isClaimed = meal.claimedBy && meal.claimedBy.trim() !== '';
+      const isDYOT = meal.isDYOT === 'TRUE';
+
+      let contentHTML = '';
+
+      if (isDYOT) {
+        contentHTML = `
+          <div class="meal-status">We're going to do our own thing</div>
+          <div class="meal-actions">
+            <button class="btn-secondary" onclick="handleClaimMeal('${meal.id}', 'cook')">I'll Cook</button>
+            <button class="btn-secondary" onclick="handleClaimMeal('${meal.id}', 'restaurant')">Let's Go Out</button>
+            <button class="btn-outline" onclick="handleUnclaimMeal('${meal.id}')">Clear</button>
+          </div>
+        `;
+      } else if (isClaimed) {
+        const isRestaurant = meal.description && meal.description.startsWith('restaurant:');
+        const displayDesc = isRestaurant ? meal.description.replace('restaurant:', '').trim() : meal.description;
+        const displayText = isRestaurant
+          ? `<strong>${meal.claimedBy}</strong> suggests going out${displayDesc ? ': ' + displayDesc : ''}`
+          : `<strong>${meal.claimedBy}</strong> is cooking${displayDesc ? ': ' + displayDesc : ''}`;
+
+        contentHTML = `
+          <div class="meal-status">${displayText}</div>
+          <div class="meal-actions">
+            <button class="btn-outline" onclick="handleUnclaimMeal('${meal.id}')">Unclaim</button>
+          </div>
+        `;
+      } else {
+        contentHTML = `
+          <div class="meal-status">Available</div>
+          <div class="meal-actions">
+            <button class="btn-primary" onclick="handleClaimMeal('${meal.id}', 'cook')">I'll Cook</button>
+            <button class="btn-primary" onclick="handleClaimMeal('${meal.id}', 'restaurant')">Let's Go Out</button>
+            <button class="btn-secondary" onclick="handleClaimMeal('${meal.id}', 'dyot')">Do Our Own Thing</button>
+          </div>
+          <div class="meal-claim-input" id="claim_${meal.id}" style="display:none;">
+            <input type="text" placeholder="" id="desc_${meal.id}" />
+            <button class="btn-primary" onclick="submitClaimMeal('${meal.id}')">Confirm</button>
+            <button class="btn-outline" onclick="cancelClaimMeal('${meal.id}')">Cancel</button>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="meal-card">
+          <div class="meal-header">${emoji} ${meal.mealType}</div>
+          <div class="meal-content">${contentHTML}</div>
+        </div>
+      `;
+    }
+
+    function renderActivitiesSection(day) {
+      const allDayActivities = appData.activities.filter(a =>
+        String(a.day) === String(day) || a.day === 'any'
+      );
+
+      // Sort: day-specific activities first, then "any day" activities
+      const daySpecific = allDayActivities.filter(a => String(a.day) === String(day));
+      const anyDay = allDayActivities.filter(a => a.day === 'any');
+      const sortedActivities = [...daySpecific, ...anyDay];
+
+      return `
+        <div class="section">
+          <div class="section-title">✨ Activities</div>
+          <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+            Make a bucket list of things for us to do on this trip! You can add it to a specific day or add it to the whole trip.
+          </div>
+          ${sortedActivities.map(activity => renderActivityCard(activity)).join('')}
+          ${sortedActivities.length === 0 ? '<div class="empty-state">No activities yet. Be the first to suggest one!</div>' : ''}
+          <button class="add-activity-btn" onclick="openSuggestModal(${day})">
+            + Add Activity
+          </button>
+        </div>
+      `;
+    }
+
+    function renderActivityCard(activity) {
+      const upvotes = activity.upvotes ? activity.upvotes.split(', ').filter(u => u.trim()) : [];
+      const downvotes = activity.downvotes ? activity.downvotes.split(', ').filter(d => d.trim()) : [];
+      const hasUpvoted = userName && upvotes.includes(userName);
+      const hasDownvoted = userName && downvotes.includes(userName);
+
+      return `
+        <div class="activity-card">
+          <div class="activity-header">
+            <div class="activity-info" style="flex: 1;">
+              <div class="activity-title">
+                ${activity.link ? `<a href="${activity.link}" target="_blank">${activity.title} →</a>` : activity.title}
+              </div>
+              <div class="activity-meta">Suggested by ${activity.suggestedBy}${activity.day === 'any' ? ' • Any day' : ''}</div>
+            </div>
+          </div>
+          ${activity.description ? `<div class="activity-description">${activity.description}</div>` : ''}
+
+          ${upvotes.length > 0 || downvotes.length > 0 ? `
+            <div style="margin: 0.75rem 0; font-size: 0.85rem; color: var(--text-secondary);">
+              ${upvotes.length > 0 ? `
+                <div style="margin-bottom: 0.375rem;">
+                  👍 <strong>Interested:</strong> ${upvotes.join(', ')}
+                </div>
+              ` : ''}
+              ${downvotes.length > 0 ? `
+                <div>
+                  👎 <strong>Not for me:</strong> ${downvotes.join(', ')}
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          <div class="activity-votes">
+            <button class="vote-btn ${hasUpvoted ? 'voted' : ''}" onclick="handleVote('${activity.id}', '${hasUpvoted ? 'remove' : 'up'}')">
+              👍 <span class="vote-count">${upvotes.length}</span>
+            </button>
+            <button class="vote-btn ${hasDownvoted ? 'voted downvote' : ''}" onclick="handleVote('${activity.id}', '${hasDownvoted ? 'remove' : 'down'}')">
+              👎 <span class="vote-count">${downvotes.length}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== EVENT HANDLERS =====
+    function switchDay(day) {
+      activeDay = day;
+      renderAll();
+    }
+
+    function openSuggestModal(day) {
+      if (!requireName()) return;
+
+      document.getElementById('activityDay').value = day;
+      document.getElementById('suggestModal').classList.add('active');
+    }
+
+    function closeSuggestModal() {
+      document.getElementById('suggestModal').classList.remove('active');
+      document.getElementById('suggestForm').reset();
+    }
+
+    function handleSuggestSubmit(e) {
+      e.preventDefault();
+
+      const activityData = {
+        title: document.getElementById('activityTitle').value,
+        description: document.getElementById('activityDescription').value,
+        link: document.getElementById('activityLink').value,
+        day: document.getElementById('activityDay').value,
+        suggestedBy: userName
+      };
+
+      suggestActivity(activityData);
+      closeSuggestModal();
+    }
+
+    let currentMealType = '';
+
+    function handleClaimMeal(mealId, mealType) {
+      if (!requireName()) return;
+
+      currentMealType = mealType;
+
+      if (mealType === 'dyot') {
+        claimMeal(mealId, userName, '', true);
+      } else if (mealType === 'cook') {
+        const input = document.getElementById(`desc_${mealId}`);
+        input.placeholder = 'What are you making? (optional)';
+        document.getElementById(`claim_${mealId}`).style.display = 'flex';
+      } else if (mealType === 'restaurant') {
+        const input = document.getElementById(`desc_${mealId}`);
+        input.placeholder = 'Where will we go? (link optional)';
+        document.getElementById(`claim_${mealId}`).style.display = 'flex';
+      }
+    }
+
+    function submitClaimMeal(mealId) {
+      let description = document.getElementById(`desc_${mealId}`).value;
+
+      if (currentMealType === 'restaurant') {
+        description = 'restaurant:' + description;
+      }
+
+      claimMeal(mealId, userName, description, false);
+      currentMealType = '';
+    }
+
+    function cancelClaimMeal(mealId) {
+      document.getElementById(`claim_${mealId}`).style.display = 'none';
+    }
+
+    function handleUnclaimMeal(mealId) {
+      if (!requireName()) return;
+      unclaimMeal(mealId);
+    }
+
+    function handleVote(activityId, vote) {
+      if (!requireName()) return;
+      voteActivity(activityId, vote);
+    }
+
+    function requireName() {
+      if (!userName) {
+        showToast('Please enter your name first');
+        document.getElementById('nameInput').focus();
+        return false;
+      }
+      return true;
+    }
+
+    // ===== NAME MANAGEMENT =====
+    function initNameBar() {
+      if (userName) {
+        document.getElementById('nameText').textContent = userName;
+        document.getElementById('nameDisplay').style.display = 'block';
+        document.getElementById('nameInputGroup').style.display = 'none';
+      } else {
+        document.getElementById('nameDisplay').style.display = 'none';
+        document.getElementById('nameInputGroup').style.display = 'flex';
+      }
+    }
+
+    function saveName() {
+      const input = document.getElementById('nameInput');
+      const name = input.value.trim();
+
+      if (!name) {
+        showToast('Please enter your name');
+        return;
+      }
+
+      userName = name;
+      localStorage.setItem('cb26_userName', name);
+      initNameBar();
+      showToast(`Welcome, ${name}!`);
+    }
+
+    function changeName() {
+      userName = '';
+      localStorage.removeItem('cb26_userName');
+      initNameBar();
+      document.getElementById('nameInput').value = '';
+      document.getElementById('nameInput').focus();
+    }
+
+    // ===== COUNTDOWN =====
+    function updateCountdown() {
+      const tripStart = new Date('2026-04-01T15:00:00-07:00'); // April 1, 3pm Pacific
+      const tripEnd = new Date('2026-04-05T11:00:00-07:00'); // April 5, 11am Pacific
+      const now = new Date();
+
+      const countdownEl = document.getElementById('countdown');
+      if (!countdownEl) return;
+
+      // During the trip
+      if (now >= tripStart && now <= tripEnd) {
+        countdownEl.textContent = '🏖️ You\'re here! Enjoy the trip!';
+        countdownEl.classList.add('arrived');
+        return;
+      }
+
+      // After the trip
+      if (now > tripEnd) {
+        countdownEl.style.display = 'none';
+        return;
+      }
+
+      // Before the trip
+      const diff = tripStart - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+      if (days > 0) {
+        countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} until arrival`;
+      } else if (hours > 0) {
+        countdownEl.textContent = `${hours} hour${hours !== 1 ? 's' : ''}, ${minutes} min until arrival`;
+      } else {
+        countdownEl.textContent = `${minutes} minute${minutes !== 1 ? 's' : ''} until arrival`;
+      }
+    }
+
+    // ===== TOAST NOTIFICATIONS =====
+    function showToast(message) {
+      const existingToast = document.querySelector('.toast');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => toast.remove(), 2500);
+    }
+
+    // ===== BOOTSTRAP =====
+    async function init() {
+      initNameBar();
+      updateCountdown();
+
+      // Update countdown every minute
+      setInterval(updateCountdown, 60000);
+
+      if (!checkSetup()) return;
+
+      document.getElementById('dayPanels').innerHTML = '<div class="loading">Loading your trip data...</div>';
+
+      await Promise.all([
+        fetchWeather(),
+        fetchTides(),
+        fetchData()
+      ]);
+
+      renderAll();
+
+      setInterval(async () => {
+        await fetchData();
+        renderAll();
+      }, 30000);
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
